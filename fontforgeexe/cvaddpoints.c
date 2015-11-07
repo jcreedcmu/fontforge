@@ -557,7 +557,7 @@ return;			/* We clicked on the active point, that's a no-op */
     } else {
 	ss = chunkalloc(sizeof(SplineSet));
 	sp = SplinePointCreate( cv->p.cx, cv->p.cy );
-	
+
 	ss->first = ss->last = sp;
 	ss->next = cv->b.layerheads[cv->b.drawmode]->splines;
 	cv->b.layerheads[cv->b.drawmode]->splines = ss;
@@ -754,6 +754,9 @@ return;
     SplineSetSpirosClear(cv->active_spl);
     cv->lastselpt = cv->active_sp;
 
+    if ((cv->info.x==active->me.x && cv->info.y==active->me.y))
+      return;
+
     active->nextcp.x = cv->info.x;
     active->nextcp.y = cv->info.y;
     if ( order2_style && active->next==NULL ) {
@@ -819,6 +822,10 @@ void CVMouseUpPoint(CharView *cv,GEvent *event) {
     cv->joinvalid = false;
     CVInfoDraw(cv,cv->gw);
     CPEndInfo(cv);
+
+    // Do not like this
+    /*
     if ( event->u.mouse.clicks>1 )
 	CVGetInfo(cv);
+    */
 }
