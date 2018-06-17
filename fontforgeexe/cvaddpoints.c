@@ -482,7 +482,7 @@ return;			/* We clicked on the active point, that's a no-op */
 	    SplineSetSpirosClear(sel);
 	    sp = SplinePointCreate( cv->p.cx, cv->p.cy );
 	    sp->noprevcp = sp->nonextcp = 1;
-	    sp->nextcpdef = sp->prevcpdef = 1;
+ 	    sp->nextcpdef = sp->prevcpdef = 0;
 	    sp->pointtype = ptype;
 	    sp->selected = true;
 	    if ( !base->nonextcp && order2_style &&
@@ -504,7 +504,7 @@ return;			/* We clicked on the active point, that's a no-op */
 		}
 	    }
 	    if ( base->nonextcp )
-		base->nextcpdef = true;
+		base->nextcpdef = false;
 	    SplineMake(base,sp,order2);
 	    if ( cv->active_tool!=cvt_pen ) {
 		SplineCharDefaultNextCP(base);
@@ -525,7 +525,7 @@ return;			/* We clicked on the active point, that's a no-op */
 		    base->nextcp.x = sp->prevcp.x = (base->nextcp.x+sp->prevcp.x)/2;
 		    base->nextcp.y = sp->prevcp.y = (base->nextcp.y+sp->prevcp.y)/2;
 		}
-		base->nextcpdef = sp->prevcpdef = true;
+		base->nextcpdef = sp->prevcpdef = false;
 	    }
 	    SplineMake(base,sp,order2);
 	    if ( cv->active_tool!=cvt_pen )
@@ -562,12 +562,12 @@ return;			/* We clicked on the active point, that's a no-op */
     } else {
 	ss = chunkalloc(sizeof(SplineSet));
 	sp = SplinePointCreate( cv->p.cx, cv->p.cy );
-	
+
 	ss->first = ss->last = sp;
 	ss->next = cv->b.layerheads[cv->b.drawmode]->splines;
 	cv->b.layerheads[cv->b.drawmode]->splines = ss;
 	sp->nonextcp = sp->noprevcp = 1;
-	sp->nextcpdef = sp->prevcpdef = 1;
+	sp->nextcpdef = sp->prevcpdef = 0;
 	sp->pointtype = ptype;
 	sp->selected = true;
     }
@@ -668,7 +668,7 @@ void CVMergeSplineSets(CharView *cv, SplinePoint *active, SplineSet *activess,
 	    !active->nonextcp && !active->noprevcp &&
 	    !active->nextcpdef && !active->prevcpdef &&
 	    !BpColinear(&active->prevcp,&active->me,&active->nextcp))
-	active->nextcpdef = active->prevcpdef = true;
+	active->nextcpdef = active->prevcpdef = false;
     SplineSetJoinCpFixup(active);
 }
 
@@ -759,6 +759,11 @@ return;
     SplineSetSpirosClear(cv->active_spl);
     cv->lastselpt = cv->active_sp;
 
+	 /* If I click and release without moving the mouse, the last thing
+		 I want is to set the control handles to zero! */
+	 if (cv->info.x==active->me.x && cv->info.y==active->me.y )
+		return;
+
     active->nextcp.x = cv->info.x;
     active->nextcp.y = cv->info.y;
     if ( order2_style && active->next==NULL ) {
@@ -824,6 +829,11 @@ void CVMouseUpPoint(CharView *cv,GEvent *event) {
     cv->joinvalid = false;
     CVInfoDraw(cv,cv->gw);
     CPEndInfo(cv);
+
+	 // Don't like this behavior
+
+	 /*
     if ( event->u.mouse.clicks>1 )
 	CVGetInfo(cv);
+	 */
 }

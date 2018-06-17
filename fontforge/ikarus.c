@@ -235,7 +235,7 @@ return;
     for ( i=1; i<=9; ++i )
 	urwtable[586+i] = 0x2080+i;
     urwtable[596] = 0x2080;
-    
+
     urwtable[601] = '.';
     urwtable[602] = ':';
     urwtable[606] = 0x2026;
@@ -319,7 +319,7 @@ return;
     urwtable[765] = 0x323;
     urwtable[766] = 0x320;
     urwtable[768] = 0x326;
-    urwtable[769] = 0x313;    
+    urwtable[769] = 0x313;
 	/* 795 is a big copyright */
 	/* 796 is a big registered */
     urwtable[854] = 0x1ebd3;
@@ -421,10 +421,10 @@ static void IkarusAddContour(SplineChar *sc,int npts,BasePoint *bps,
     sc->layers[ly_fore].splines = spl;
     spl->first = spl->last = last = SplinePointCreate(bps[0].x,bps[0].y);
     last->pointtype = ptype[npts-1];
-    last->nextcpdef = last->prevcpdef = true;
+    last->nextcpdef = last->prevcpdef = false;
     for ( i=1; i<npts-1; ++i ) {
 	next = SplinePointCreate(bps[i].x,bps[i].y);
-	next->nextcpdef = next->prevcpdef = true;
+	next->nextcpdef = next->prevcpdef = false;
 	next->pointtype = ptype[i];
 	SplineMake3(last,next);
 	last = next;
@@ -617,12 +617,12 @@ return( NULL );
 	/* Docs don't mention this, but lower case is ok too */;
     else if ( ch1!='I' || ch2!='K' ) {
 	if ( (ch1=='D' && ch2=='I') || (ch1=='V' && ch2=='C') ||
-		(ch1=='V' && ch2=='S') || (ch1=='V' && ch2=='E') || 
-		(ch1=='S' && ch2=='C') || (ch1=='S' && ch2=='N') || 
+		(ch1=='V' && ch2=='S') || (ch1=='V' && ch2=='E') ||
+		(ch1=='S' && ch2=='C') || (ch1=='S' && ch2=='N') ||
 		(ch1=='B' && ch2=='I') || (ch1=='G' && isdigit(ch2)) ||
 		(ch1=='d' && ch2=='i') || (ch1=='v' && ch2=='c') ||
-		(ch1=='v' && ch2=='s') || (ch1=='v' && ch2=='e') || 
-		(ch1=='s' && ch2=='c') || (ch1=='s' && ch2=='n') || 
+		(ch1=='v' && ch2=='s') || (ch1=='v' && ch2=='e') ||
+		(ch1=='s' && ch2=='c') || (ch1=='s' && ch2=='n') ||
 		(ch1=='b' && ch2=='i') || (ch1=='g' && isdigit(ch2)))
 	    LogError( _("This is probably a valid URW font, but it is in a format (%c%c) which FontForge\ndoes not support. FontForge only supports 'IK' format fonts.\n"), ch1, ch2 );
 	else if ( ch1==0 && ch2==0 && ilen==55 )

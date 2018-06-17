@@ -47,7 +47,7 @@ CharView.Menu.Edit.Copy RBearing:No Shortcut
 CharView.Menu.Edit.Paste:Ctrl+V
 CharView.Menu.Edit.Chop:Delete
 CharView.Menu.Edit.Clear Background:No Shortcut
-CharView.Menu.Edit.Merge:Ctrl+M
+CharView.Menu.Edit.Merge:Alt+S
 CharView.Menu.Edit.Merge to Line:Alt+Ctrl+M
 CharView.Menu.Edit.Join:Ctrl+Shift+J
 CharView.Menu.Edit.Copy Fg To Bg:Ctrl+Shift+C
@@ -128,13 +128,13 @@ CharView.Menu.Element.Transformations:No Shortcut
 CharView.Menu.Element.Expand Stroke...:Ctrl+Shift+E
 CharView.Menu.Element.Tile Path...:No Shortcut
 CharView.Menu.Element.Tile Pattern...:No Shortcut
-CharView.Menu.Element.Add Extrema:Ctrl+Shift+X
+CharView.Menu.Element.Add Extrema:Ctl+Shift+X
 CharView.Menu.Element.Autotrace:Ctrl+Shift+T
 CharView.Menu.Element.Clockwise:No Shortcut
 CharView.Menu.Element.Clockwise:No Shortcut
 CharView.Menu.Element.Clockwise:No Shortcut
 CharView.Menu.Element.Counter Clockwise:No Shortcut
-CharView.Menu.Element.Correct Direction:Ctrl+Shift+D
+CharView.Menu.Element.Correct Direction:Alt+D
 CharView.Menu.Element.Reverse Direction:No Shortcut
 CharView.Menu.Element.Insert Text Outlines:No Shortcut
 CharView.Menu.Element.Compare Layers...:No Shortcut

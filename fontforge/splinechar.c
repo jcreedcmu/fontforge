@@ -694,9 +694,9 @@ return;
 	}
 	if( pointtype==pt_curve )
 	    makedflt = true;
-	
+
 	if ( makedflt ) {
-	    sp->nextcpdef = sp->prevcpdef = true;
+	    sp->nextcpdef = sp->prevcpdef = false;
 	    if (( sp->prev!=NULL && sp->prev->order2 ) ||
 		    (sp->next!=NULL && sp->next->order2)) {
 		if ( sp->prev!=NULL )

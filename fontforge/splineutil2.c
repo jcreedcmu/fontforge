@@ -361,7 +361,7 @@ return( NULL );
 	    if ( !RealWithin(mid[i].y,from->me.y+slope*(mid[i].x-from->me.x),.7) )
 return( NULL );
     } else {
-	slope = vx/vy; 
+	slope = vx/vy;
 	for ( i=0; i<cnt; ++i )
 	    if ( !RealWithin(mid[i].x,from->me.x+slope*(mid[i].y-from->me.y),.7) )
 return( NULL );
@@ -411,7 +411,7 @@ static int _ApproximateSplineFromPoints(SplinePoint *from, SplinePoint *to,
     int nrescnt=0, prescnt=0;
     bigreal nmin, nmax, pmin, pmax, test, ptest;
     bigreal bx, by, cx, cy;
-	    
+
     memset(&nres,0,sizeof(nres)); memset(&pres,0,sizeof(pres));
 
     /* Add the initial and end points */
@@ -497,7 +497,7 @@ static int _ApproximateSplineFromPoints(SplinePoint *from, SplinePoint *to,
 	    m[0][2] -= m[0][1]*m[1][2]; m[0][1] = 0;
 	    vx[2] -= m[2][1]*vx[1];
 	    vy[2] -= m[2][1]*vy[1];
-	    m[2][2] -= m[2][1]*m[1][2]; m[2][1] = 0; 
+	    m[2][2] -= m[2][1]*m[1][2]; m[2][1] = 0;
 
 	    vx[0] /= m[0][2];			/* This is cx */
 	    vy[0] /= m[0][2];			/* This is cy */
@@ -939,7 +939,7 @@ Spline *ApproximateSplineFromPointsSlopes(SplinePoint *from, SplinePoint *to,
     /* If all the selected points are at the same spot, and one of the */
     /*  end-points is also at that spot, then just copy the control point */
     /* But our caller seems to have done that for us */
-    
+
     /* If the two end-points are corner points then allow the slope to vary */
     /* Or if one end-point is a tangent but the point defining the tangent's */
     /*  slope is being removed then allow the slope to vary */
@@ -1135,7 +1135,7 @@ return( SplineMake3(from,to));
 
     trylen = (to->me.x-from->me.x)*fromunit.x + (to->me.y-from->me.y)*fromunit.y;
     if ( trylen>flen ) flen = trylen;
-    
+
     trylen = (from->me.x-to->me.x)*tounit.x + (from->me.y-to->me.y)*tounit.y;
     if ( trylen>tlen ) tlen = trylen;
 
@@ -1530,7 +1530,7 @@ static void GlyphBindToPath(SplineSet *glyph,SplineSet *path) {
     MatMultiply(offset,transform,transform);
     SplinePointListTransform(glyph,transform,tpt_AllPoints);
 }
-    
+
 
 SplineSet *SplineSetBindToPath(SplineSet *ss,int doscale, int glyph_as_unit,
 	int align,real offset, SplineSet *path) {
@@ -1546,7 +1546,7 @@ SplineSet *SplineSetBindToPath(SplineSet *ss,int doscale, int glyph_as_unit,
     memset(transform,0,sizeof(transform));
     transform[0] = transform[3] = 1;
     SplineSetFindBounds(ss,&b);
-    
+
     if ( doscale && b.maxx-b.minx!=0 ) {
 	transform[0] = transform[3] = pathlength/(b.maxx-b.minx);
 	transform[4] = -b.minx;
@@ -1691,7 +1691,7 @@ static TPoint *SplinesFigureTPsBetween(SplinePoint *from, SplinePoint *to,
     if ( lens!=_lens ) free(lens);
 
     *tot = i;
-	
+
 return( tp );
 }
 
@@ -1731,7 +1731,7 @@ void SplinesRemoveBetween(SplineChar *sc, SplinePoint *from, SplinePoint *to,int
 	sp = np->next;
 	SplinePointMDFree(sc,np);
     }
-    
+
     free(tp);
 
     SplinePointReCategorize(from,oldfpt);
@@ -1911,7 +1911,7 @@ return;
     break;
 	nsp = sp->next->to;
 	if (( !sp->nonextcp || !sp->noprevcp ) && sp->prev!=NULL ) {
-	    psp = sp->prev->from; 
+	    psp = sp->prev->from;
 	    nbp = !sp->nonextcp ? &sp->nextcp : !nsp->noprevcp ? &nsp->prevcp : &nsp->me;
 	    pbp = !sp->noprevcp ? &sp->prevcp : !psp->nonextcp ? &psp->nextcp : &psp->me;
 
@@ -2205,7 +2205,7 @@ return( -1e10 );
 
 return( top/(dxdt*dxdt) );
 }
-    
+
 
 /* Does the second derivative change sign around this point? If so we should */
 /*  retain it for truetype */
@@ -3483,7 +3483,7 @@ return( true );	/* We changed the slope */
 	SplineRefigure(s);
 return( true );	/* We changed the slope */
     }
-    
+
     if ( (xdiff = cp->x - end->me.x)<0 ) xdiff = -xdiff;
     if ( (ydiff = cp->y - end->me.y)<0 ) ydiff = -ydiff;
 
@@ -3685,7 +3685,7 @@ return(s);
 		    }
 		}
 	    }
-		
+
 	    if ( t[i]<=0 || t[i]>=1.0 ) {
 		--p;
 		for ( j=i; j<p; ++j ) {
@@ -4114,7 +4114,7 @@ return;
 	vector->x = 0;
     }
 }
-    
+
 #define NICE_PROPORTION	.39
 void SplineCharDefaultNextCP(SplinePoint *base) {
     SplinePoint *prev=NULL, *next;
@@ -4175,7 +4175,7 @@ return;
 	} else {
 	    base->prevcp = base->me;
 	    base->noprevcp = true;
-	    base->prevcpdef = true;
+	    base->prevcpdef = false;
 	}
 	if ( base->pointtype == pt_hvcurve )
 	    BP_HVForce(&unit);
@@ -4255,7 +4255,7 @@ return;
 	    unit.x = prev->me.x - next->me.x;
 	    unit.y = prev->me.y - next->me.y;
 	    ulen = sqrt(unit.x*unit.x + unit.y*unit.y);
-	    if ( ulen!=0 ) 
+	    if ( ulen!=0 )
 		unit.x /= ulen, unit.y /= ulen;
 	    if ( base->pointtype == pt_hvcurve )
 		BP_HVForce(&unit);
@@ -4279,7 +4279,7 @@ return;
 	} else {
 	    base->nextcp = base->me;
 	    base->nonextcp = true;
-	    base->nextcpdef = true;
+	    base->nextcpdef = false;
 	}
 	if ( base->pointtype == pt_hvcurve )
 	    BP_HVForce(&unit);
@@ -4671,7 +4671,7 @@ return( spl );
 
 void SplineSetsUntick(SplineSet *spl) {
     Spline *spline, *first;
-    
+
     while ( spl!=NULL ) {
 	first = NULL;
 	spl->first->isintersection = false;
@@ -4689,7 +4689,7 @@ void SplineSetsUntick(SplineSet *spl) {
 
 static void SplineSetTick(SplineSet *spl) {
     Spline *spline, *first;
-    
+
     first = NULL;
     for ( spline=spl->first->next; spline!=first && spline!=NULL; spline = spline->to->next ) {
 	spline->isticked = true;
@@ -4699,7 +4699,7 @@ static void SplineSetTick(SplineSet *spl) {
 
 static SplineSet *SplineSetOfSpline(SplineSet *spl,Spline *search) {
     Spline *spline, *first;
-    
+
     while ( spl!=NULL ) {
 	first = NULL;
 	for ( spline=spl->first->next; spline!=first && spline!=NULL; spline = spline->to->next ) {
@@ -5084,7 +5084,7 @@ return( false );
     base = bp[0];
     for ( i=1; i<4; i++ ) {
         line1[0] = base; line1[1] = bp[i];
-        
+
         k=0;
         for ( j=1; j<4; j++ ) {
             if ( j != i )
