@@ -149,7 +149,7 @@ int CVClearSel(CharView *cv) {
     AnchorPoint *ap;
 
     CVFreePreTransformSPL( cv );
-    
+
     cv->lastselpt = NULL; cv->lastselcp = NULL;
     for ( spl = cv->b.layerheads[cv->b.drawmode]->splines; spl!=NULL; spl = spl->next )
     {
@@ -628,7 +628,7 @@ void CVMouseDownPointer(CharView *cv, FindSel *fs, GEvent *event) {
 	    cv->p.spline->from && cv->p.spline->to
 	    && cv->p.spline->from->selected && cv->p.spline->to->selected;
     }
-    
+
     if ( cv->pressed==NULL )
 	cv->pressed = GDrawRequestTimer(cv->v,200,100,NULL);
     cv->last_c.x = cv->info.x; cv->last_c.y = cv->info.y;
@@ -659,7 +659,7 @@ return;
 	 (fs->p->img==NULL   || !fs->p->img->selected) &&
 	 (fs->p->ap==NULL    || !fs->p->ap->selected) &&
 	 (!dowidth    || !cv->widthsel) &&
-	 (!dolbearing || !cv->lbearingsel) && 
+	 (!dolbearing || !cv->lbearingsel) &&
 	 (!dovwidth   || !cv->vwidthsel) &&
 	 (!doic  || !cv->icsel) &&
 	 (!dotah || !cv->tah_sel) &&
@@ -895,7 +895,7 @@ return;
 	if ( CVSetSel(cv,-1)) needsupdate = true;
     }
 
-    
+
     if ( needsupdate )
 	SCUpdateAll(cv->b.sc);
 
@@ -1292,7 +1292,7 @@ return(false);
 	    			     (void*)(intptr_t)cv->b.layerheads[cv->b.drawmode]->order2 );
 	}
     }
-    
+
 
     for ( refs = cv->b.layerheads[cv->b.drawmode]->refs; refs!=NULL; refs=refs->next ) if ( refs->selected ) {
 	refs->transform[4] += transform[4];
@@ -1453,7 +1453,7 @@ int CVMouseMovePointer(CharView *cv, GEvent *event) {
     int did_a_merge = false;
     int touch_control_points = false;
 
-    
+
     /* if we haven't moved from the original location (ever) then this is a noop */
     if ( !cv->p.rubberbanding && !cv->recentchange &&
 	    RealNear(cv->info.x,cv->p.cx) && RealNear(cv->info.y,cv->p.cy) )
@@ -1532,10 +1532,10 @@ return( false );
 	d.dx = (cv->info.x - cv->p.sp->prevcp.x) * arrowAmount;
 	d.dy = (cv->info.y - cv->p.sp->prevcp.y) * arrowAmount;
 	visitSelectedControlPointsVisitor func = FE_adjustBCPByDelta;
-	
+
 	if( cv->activeModifierAlt )
 	    func = FE_adjustBCPByDeltaWhilePreservingBCPAngle;
-	
+
 	CVFindAndVisitSelectedControlPoints( cv, false, func, &d );
 	CPUpdateInfo(cv,event);
 	needsupdate = true;
@@ -1546,7 +1546,7 @@ return( false );
     {
 	if ( !cv->recentchange )
 	    CVPreserveState(&cv->b);
-	
+
 	CVAdjustSpline(cv);
 	CVSetCharChanged(cv,true);
 	needsupdate = true;
@@ -1568,19 +1568,7 @@ return( false );
 	double xadj = cv->info.x-cv->last_c.x;
 	double yadj = cv->info.y-cv->last_c.y;
 	touch_control_points = true;
-	// The modifier is wrong.
-	if (cv->p.anysel && cv->p.sp && event->u.mouse.state & ksm_control) {
-		// Identify the individual point clicked. Find its control points. Move the selected point on a line between those control points.
-		tmpp1 = nearest_point_on_line_segment((BasePoint){cv->p.sp->prevcp.x,cv->p.sp->prevcp.y}, \
-			(BasePoint){cv->p.sp->nextcp.x,cv->p.sp->nextcp.y}, (BasePoint){cv->info.x, cv->info.y});
-		// We also need to rebase the original point onto that line segment so that the movement is exactly along the line even if the original click is not.
-		tmpp2 = nearest_point_on_line_segment((BasePoint){cv->p.sp->prevcp.x,cv->p.sp->prevcp.y}, \
-			(BasePoint){cv->p.sp->nextcp.x,cv->p.sp->nextcp.y}, (BasePoint){cv->last_c.x, cv->last_c.y});
-		xadj = tmpp1.x-tmpp2.x;
-		yadj = tmpp1.y-tmpp2.y;
-		touch_control_points = false; // We will need to move the control points back (but only for the point dragged).
-	}
-	
+
 	did_a_merge = CVMoveSelection(cv,
 		xadj,yadj,
 		event->u.mouse.state);
