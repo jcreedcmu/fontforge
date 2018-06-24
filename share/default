@@ -47,7 +47,7 @@ CharView.Menu.Edit.Copy RBearing:No Shortcut
 CharView.Menu.Edit.Paste:Ctrl+V
 CharView.Menu.Edit.Chop:Delete
 CharView.Menu.Edit.Clear Background:No Shortcut
-CharView.Menu.Edit.Merge:Alt+S
+CharView.Menu.Edit.Merge:S
 CharView.Menu.Edit.Merge to Line:Alt+Ctrl+M
 CharView.Menu.Edit.Join:Ctrl+Shift+J
 CharView.Menu.Edit.Copy Fg To Bg:Ctrl+Shift+C
@@ -81,15 +81,16 @@ CharView.Menu.Point.Tools.Pointer:V
 CharView.Menu.Point.Tools.Magnify:A
 CharView.Menu.Point.Tools.Freehand:F
 CharView.Menu.Point.Tools.Scroll:H
-CharView.Menu.Point.Tools.Pen:P
+CharView.Menu.Point.Tools.Pen:C
 CharView.Menu.Point.Tools.Knife:K
+CharView.Menu.Point.Tools.Rotate:Q
 
 CharView.Menu.Point.Tools.Curve:2
 CharView.Menu.Point.Tools.Corner:3
 CharView.Menu.Point.Tools.Tangent:4
 CharView.Menu.Point.Tools.HVCurve:5
 
-CharView.Menu.Point.Tools.Toggle Spiro:S
+CharView.Menu.Point.Tools.Toggle Spiro:No Shortcut
 +CharView.Menu.Point.Tools.G2:1
 +CharView.Menu.Point.Tools.G4:2
 +CharView.Menu.Point.Tools.Corner:3
@@ -128,7 +129,7 @@ CharView.Menu.Element.Transformations:No Shortcut
 CharView.Menu.Element.Expand Stroke...:Ctrl+Shift+E
 CharView.Menu.Element.Tile Path...:No Shortcut
 CharView.Menu.Element.Tile Pattern...:No Shortcut
-CharView.Menu.Element.Add Extrema:Ctl+Shift+X
+CharView.Menu.Element.Add Extrema:X
 CharView.Menu.Element.Autotrace:Ctrl+Shift+T
 CharView.Menu.Element.Clockwise:No Shortcut
 CharView.Menu.Element.Clockwise:No Shortcut
@@ -138,7 +139,7 @@ CharView.Menu.Element.Correct Direction:Alt+D
 CharView.Menu.Element.Reverse Direction:No Shortcut
 CharView.Menu.Element.Insert Text Outlines:No Shortcut
 CharView.Menu.Element.Compare Layers...:No Shortcut
-CharView.Menu.Element.Align.Align Points:Ctrl+Shift+@
+CharView.Menu.Element.Align.Align Points:2
 CharView.Menu.Element.Align.Space Points:No Shortcut
 CharView.Menu.Element.Align.Space Regions...:No Shortcut
 CharView.Menu.Element.Align.Make Parallel...:No Shortcut
@@ -249,7 +250,7 @@ CharView.Menu.View.Show.Vertical Metric Lines:No Shortcut
 CharView.Menu.View.Show.Snap Outlines to Pixel Grid:No Shortcut
 CharView.Menu.View.Zoom out:Alt+Ctrl+-
 CharView.Menu.View.Zoom out:-
-CharView.Menu.View.Zoom out:X
+CharView.Menu.View.Zoom out:No Shortcut
 CharView.Menu.View.Zoom in:Alt+Ctrl+=
 CharView.Menu.View.Zoom in:=
 CharView.Menu.View.Zoom in:Z
