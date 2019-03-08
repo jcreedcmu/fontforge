@@ -1,4 +1,4 @@
 #!/bin/bash
 ./bootstrap 
 ./configure --without-x 
-make 
+make -j4
